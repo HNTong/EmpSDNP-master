@@ -9,7 +9,7 @@ function perf = SHSE(trainData, testData, learner, locIndex, useDensity, numLear
 %   (6) feaRatio (0,1] - how much features are selected.
 %   (7) insRatio (0,1] - how much majority class instances are selected.
 % OUTPUTS:
-%   perf - a strcut
+%   perf - a strcut variable.
 
 % Default values
 if ~exist('useDensity','var')||isempty(useDensity)
@@ -87,7 +87,7 @@ for j0=1:K
 %     idxSelIns = randi(size(trainXOri,1), size(trainXOri,1), 1);
 %     idxSelInsPosNum = ceil(length(idxSelIns)*ratePN);
     idxSelInsPosNum = size(trainXPos,1);
-    idxSelInsNegNum = floor(size(trainXNeg,1)*insRatio); % ∂‡ ˝¿‡«∑≥È—˘
+    idxSelInsNegNum = floor(size(trainXNeg,1)*insRatio); % Â§öÊï∞Á±ªÊ¨†ÊäΩÊ†∑
     
     
     idxPos = randperm(size(trainXPos,1),idxSelInsPosNum);
@@ -227,7 +227,7 @@ preE = round(preES*weight(1,:)');
 % weight(2,:) = weight(2,:)/(sum(weight(2,:))+eps);
 % preE = round(preES*weight(2,:)');
 
-% weight(2,:) = weight(2,:)/(sum(weight(2,:))+eps); % »®÷ÿπÈ“ªªØ for FPA
+% weight(2,:) = weight(2,:)/(sum(weight(2,:))+eps); % ÊùÉÈáçÂΩí‰∏ÄÂåñ for FPA
 % preE = round(preES*weight(2,:)');
 
 
