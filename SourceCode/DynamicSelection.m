@@ -10,7 +10,7 @@ function perf = DynamicSelection(train, test, testLOC, K)
 %      Techniques. IEEE Transactions on Reliability, 2018. DOI:
 %      10.1109/TR.2018.2864206.
 %
-% Written by Haonan Tong, hntong@bjtu.edu.cn.
+%
 
 
 if ~exist('K','var')||isempty(K)
@@ -164,7 +164,7 @@ function wekaOBJ = matlab2weka(name, featureNames, data,targetIndex)
         targetIndex = numel(featureNames); %will compensate for 0-based indexing later
     end
 
-    import weka.core.*;%£¡£¡£¡
+    import weka.core.*;%Â£Â¡Â£Â¡Â£Â¡
     vec = FastVector();
     if(iscell(data))
         for i=1:numel(featureNames)
