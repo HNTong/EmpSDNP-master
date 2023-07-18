@@ -1,17 +1,17 @@
 function SynSamples = SMOTEND(dataSet, ideRatio, k, seed)
 %SMOTEND Summary of this function goes here: Implement SMOTER algorithm.
 %   Detailed explanation goes here
-% INPUTS£º
-%   (1) dataSet - ±»³éÑùµÄÑù±¾¼¯£¬Ò»¸ön*(d+1)¾ØÕó£¬nÎªÑù±¾Êı£¬dÎªÌØÕ÷ÊıÄ¿£¬×îºóÒ»ÁĞÎª±êÇ©£¬{0,1}£¬ÆäÖĞ1±íÊ¾ÉÙÊıÀà£»×¢Òâ£º²»ÄÜº¬ÓĞÖØ¸´Ñù±¾£¬»ò³åÍ»Ñù±¾£¨ÌØÕ÷ÏàÍ¬£¬µ«Òò±äÁ¿²»Í¬£©
-%   (2) ideRatio - ¹ı³éÑùºóÉÙÊıÀàÑù±¾ÊıÓë¶àÊıÀàÑù±¾ÊıµÄ±ÈÖµ£»
-% OUTPUTS£º
-%   SynSamples: Éú³ÉµÄÉÙÊıÀàÑù±¾
+% INPUTSï¼š
+%   (1) dataSet - a n*(d+1) matrix;
+%   (2) ideRatio - the ideal imbalance ratio after resampling; 
+% OUTPUTSï¼š
+%   SynSamples: the sythetic minority class sampels.
 %
 % Reference: Torgo, L., et al. SMOTE for Regression. in Progress in
 %       Artificial Intelligence. 2013. Berlin, Heidelberg: Springer Berlin
 %       Heidelberg: Berlin, Heidelberg. p. 378-389.
 %
-% Written by Haonan Tong, hntong@bjtu.edu.cn.
+
 
 
 if nargin<1
@@ -43,7 +43,7 @@ if m>=(n-m) % No resampling if number of defective modules is larger than number
 end
 
 minoSam = dataSet(dataSet(:,end)~=0,:); % 
-majoSam = dataSet(dataSet(:,end)==0,:);  % ±êÇ©ÎªÁã´ú±í¶àÊıÀàÑù±¾
+majoSam = dataSet(dataSet(:,end)==0,:);  % æ ‡ç­¾ä¸ºé›¶ä»£è¡¨å¤šæ•°ç±»æ ·æœ¬
 minoSamX = minoSam(:,1:end-1);
 
 
@@ -55,26 +55,26 @@ else
     indexOri = floor(gNum/m); % 
 end
 
-% Ã¿¸öÕıÑù±¾µÄÕıÀà½üÁÚ
-D = dist(minoSamX'); % Dij±íÊ¾µÚi¸öÑù±¾µ½µÚj¸öÑù±¾µÄÅ·Ê½¾àÀë£¬ DÊÇÒ»¸ö¶Ô³Æ¾ØÕó£»
-D = D - eye(size(D,1),size(D,1)); % ¶Ô½ÇÏßÔªËØÈ«²¿±äÎª¸ºÊı£¬ºóĞøºÃÉ¾³ı
-[~, idx] = sort(D, 2); % DÖĞÃ¿ĞĞÔªËØ°´ÉıĞòÅÅÁĞ
-idx = idx(:,2:end); % ÌŞ³ı±¾Éí£¨µÚÒ»ÁĞ£©£»½üÁÚË÷Òı£¨Ïà¶ÔÓÚminoSam£¬²»ÊÇdataSet£©
+% æ¯ä¸ªæ­£æ ·æœ¬çš„æ­£ç±»è¿‘é‚»
+D = dist(minoSamX'); % Dijè¡¨ç¤ºç¬¬iä¸ªæ ·æœ¬åˆ°ç¬¬jä¸ªæ ·æœ¬çš„æ¬§å¼è·ç¦»ï¼Œ Dæ˜¯ä¸€ä¸ªå¯¹ç§°çŸ©é˜µï¼›
+D = D - eye(size(D,1),size(D,1)); % å¯¹è§’çº¿å…ƒç´ å…¨éƒ¨å˜ä¸ºè´Ÿæ•°ï¼Œåç»­å¥½åˆ é™¤
+[~, idx] = sort(D, 2); % Dä¸­æ¯è¡Œå…ƒç´ æŒ‰å‡åºæ’åˆ—
+idx = idx(:,2:end); % å‰”é™¤æœ¬èº«ï¼ˆç¬¬ä¸€åˆ—ï¼‰ï¼›è¿‘é‚»ç´¢å¼•ï¼ˆç›¸å¯¹äºminoSamï¼Œä¸æ˜¯dataSetï¼‰
 
 
-SynSamples = zeros(m*indexOri, size(dataSet,2)); % ³õÊ¼»¯
-count = 1; % ³õÊ¼»¯
+SynSamples = zeros(m*indexOri, size(dataSet,2)); % åˆå§‹åŒ–
+count = 1; % åˆå§‹åŒ–
 for i=1:m % each defective sample, m>=2
     index = indexOri;
     
     while index
         if k<=size(idx,2) % 
-            nn = idx(i,randperm(k,1)); % minoSamµÄµÚi¸öÉÙÊıÀàÑù±¾µÄÇ°k¸ö½üÁÚÖĞµÄÈÎÒâÒ»¸ö½üÁÚ
+            nn = idx(i,randperm(k,1)); % minoSamçš„ç¬¬iä¸ªå°‘æ•°ç±»æ ·æœ¬çš„å‰kä¸ªè¿‘é‚»ä¸­çš„ä»»æ„ä¸€ä¸ªè¿‘é‚»
         else
             
             temp0 = size(idx,2);
             temp = randperm(temp0,1);
-            nn = idx(i,temp,1); % minoSamµÄµÚi¸öÉÙÊıÀàÑù±¾µÄÇ°k¸ö½üÁÚÖĞµÄÈÎÒâÒ»¸ö½üÁÚ
+            nn = idx(i,temp,1); % minoSamçš„ç¬¬iä¸ªå°‘æ•°ç±»æ ·æœ¬çš„å‰kä¸ªè¿‘é‚»ä¸­çš„ä»»æ„ä¸€ä¸ªè¿‘é‚»
             
         end
         
