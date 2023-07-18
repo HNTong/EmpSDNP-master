@@ -1,24 +1,24 @@
 function popt20 = Ptop20(actNum, preNum)
-%PTOP20 ´Ë´¦ÏÔÊ¾ÓĞ¹Ø´Ëº¯ÊıµÄÕªÒª
-% ¹¦ÄÜ£º¼ÆËãPopt20%
-% ÊäÈë²ÎÊı£º
-%   (1) actNum - Êµ¼ÊÖµ
-%   (2) preNum - Ô¤²âÖµ
-% Êä³ö²ÎÊı£º
+%PTOP20 Summary of this function goes here
+%   Detailed explanation goes here
+% INPUTSï¼š
+%   (1) actNum - actual value
+%   (2) preNum - predicted value
+% OUTPUTSï¼š
 %
 %
-% ²Î¿¼ÎÄÏ×£ºWeyuker E J , Ostrand T J , Bell R M . Comparing the effectiveness of several modeling methods for fault prediction. Empirical Software Engineering, 2010, 15(3):277-295.
+% Referenceï¼šWeyuker E J , Ostrand T J , Bell R M . Comparing the effectiveness of several modeling methods for fault prediction. Empirical Software Engineering, 2010, 15(3):277-295.
 
-% ËÄÉáÎåÈë
+% 
 preNum = round(preNum);
 
-% Step1: ¶ÔÔ¤²âÖµ½øĞĞÉıĞòÅÅÁĞ
+% Step1: 
 [~, idx] = sort(preNum); % 
 
-% Step2: µ÷Õû¶ÔÓ¦µÄÊµ¼ÊÖµµÄË³Ğò
+% Step2: 
 s_actNum = actNum(idx);
 
-% Step:¼ÆËã×îÖÕ½á¹û
+% Step3
 K = length(actNum);
 N = sum(actNum);
 m = floor(0.2*K);
