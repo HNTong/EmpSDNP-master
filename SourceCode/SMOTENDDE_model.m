@@ -1,6 +1,6 @@
 function perf = SMOTENDDE_model(train, test, learner, testLOC)
-%SMOTENDDE_MODEL 此处显示有关此函数的摘要
-%   此处显示详细说明
+%SMOTENDDE_MODEL Summary of this function goes here: Implement the SMOTENDDE model.
+%   Detailed explanation goes here
 
 rand('seed',0);
 
