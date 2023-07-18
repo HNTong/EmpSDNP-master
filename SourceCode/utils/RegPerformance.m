@@ -1,11 +1,11 @@
 function outputs = RegPerformance(actY, preY, LOC)
-%REGPERFORMANCE ´Ë´¦ÏÔÊ¾ÓÐ¹Ø´Ëº¯ÊýµÄÕªÒª
-% ¹¦ÄÜ£º ¼ÆËã»Ø¹éÐÔÄÜ
-% ÊäÈë²ÎÊý£º
-%   (1) actY - n*1 vector
-%   (2) preY - n*1 vector
-% Êä³ö²ÎÊý£º
-%   outputs
+%REGPERFORMANCE Summary of this function goes here
+%   Detailed explanation goes here
+% INPUTSï¼š
+%   (1) actY - n*1 vector;
+%   (2) preY - n*1 vector;
+% OUTPUTSï¼š
+%   outputs  - a struct variable.
 %
 
 if~exist('LOC','var')||isempty(LOC)
@@ -16,7 +16,7 @@ if size(actY,2)>1||size(preY,2)>1
     assert('Inputs must be column vetor');
 end
 
-% % ½µÐòÅÅÁÐ - ÔÚ²âÊÔÊý¾Ý²»È«ÎªÁãµÄÇ°ÌáÏÂ£¬Èç¹ûÄ£ÐÍÔ¤²âÖµÈ«ÎªÁã£¬Ôò¸ÃÄ£ÐÍFPAÐÔÄÜ×î²î£»·ñÔò£¬Èç¹û²âÊÔÊý¾Ý¸ÕºÃÊÇÉýÐòÅÅÁÐ£¬ÔòÔ¤²âÖµÈ«ÎªÁãµÄÄ£ÐÍ»á±ä³É×îÓÅµÄÄ£ÐÍ£¨FPA=1£©
+% % 
 % [~, idx] = sort(actY,'descend');
 % actY = actY(idx);
 % preY = preY(idx);
@@ -39,7 +39,7 @@ for i=1:maxIte
     areV(i) = mean(abs(preY-actY)./(actY+1));
     rmseV(i) = sqrt(mean((preY-actY).^2));
     
-    kendallV(i) = corr(actY, preY, 'type' , 'kendall');  % NOTE: must be column vector; kendall ranges from ¨C1 to +1. A value of ¨C1 indicates perfect negative correlation, while a value of +1 indicates perfect positive correlation. A value of 0 indicates no correlation between the columns.
+    kendallV(i) = corr(actY, preY, 'type' , 'kendall');  % NOTE: must be column vector; kendall ranges from â€“1 to +1. A value of â€“1 indicates perfect negative correlation, while a value of +1 indicates perfect positive correlation. A value of 0 indicates no correlation between the columns.
     ptop20V(i) = Ptop20(actY, preY);
     
     if LOC~=0
@@ -48,7 +48,7 @@ for i=1:maxIte
     end
 end
 % NAN -> 0
-kendallV(isnan(kendallV)) = 0; % Á½ÕßÎÞ¹Ø
+kendallV(isnan(kendallV)) = 0; % 
 
 outputs.fpa = nanmean(fpaV);
 outputs.kendall = nanmean(kendallV);
