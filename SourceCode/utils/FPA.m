@@ -1,22 +1,22 @@
 function fpa = FPA(actY, preY)
-%FPA ´Ë´¦ÏÔÊ¾ÓĞ¹Ø´Ëº¯ÊıµÄÕªÒª
-% ¹¦ÄÜ£º¼ÆËãFPA
-% ÊäÈë²ÎÊı£º
+%FPA Summary of this function goes here
+%   Detailed explanation goes here
+% INPUTSï¼š
 %   (1) actY - The actual number of defects in samples
 %   (2) preY - The predicted number of defects in samples
 %
-% ²Î¿¼ÎÄÏ×£ºWeyuker E J , Ostrand T J , Bell R M . Comparing the effectiveness of several modeling methods for fault prediction. Empirical Software Engineering, 2010, 15(3):277-295.
+% Referenceï¼šWeyuker E J , Ostrand T J , Bell R M . Comparing the effectiveness of several modeling methods for fault prediction. Empirical Software Engineering, 2010, 15(3):277-295.
 
-% ËÄÉáÎåÈë
+% Round
 % preY = round(preY);
 
-% Step1: ¶ÔÔ¤²âÖµ½øĞĞÉıĞòÅÅÁĞ
+% Step1: 
 [~, idx] = sort(preY); % 
 
-% Step2: µ÷Õû¶ÔÓ¦µÄÊµ¼ÊÖµµÄË³Ğò
+% Step2: 
 sorted_act_target = actY(idx);
 
-% Step3:¼ÆËã
+% Step3:
 temp = 0;
 K = length(actY);
 N = sum(actY);
